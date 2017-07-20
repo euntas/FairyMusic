@@ -11,7 +11,13 @@
         android:orientation="vertical">
         <include layout="@layout/include_toolbar" />
         <include layout="@layout/include_samples_view" />
+
     </LinearLayout>
+
+
+
+
+
     <include layout="@layout/include_navigation" />
 
 </android.support.v4.widget.DrawerLayout>
