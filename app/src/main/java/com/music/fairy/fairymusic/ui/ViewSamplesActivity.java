@@ -6,11 +6,16 @@ import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.music.fairy.fairymusic.R;
 import com.music.fairy.fairymusic.ui.base.BaseActivity;
+
+import org.w3c.dom.Text;
 
 /**
  * Activity demonstrates some GUI functionalities from the Android support library.
@@ -19,18 +24,23 @@ import com.music.fairy.fairymusic.ui.base.BaseActivity;
  */
 public class ViewSamplesActivity extends BaseActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_samples);
         ButterKnife.bind(this);
         setupToolbar();
+
+
     }
 
-    @OnClick(R.id.fab)
-    public void onFabClicked(View view) {
-        Snackbar.make(view, "Hello Snackbar!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+    public void quizCheck(View v){
+        TextView quizResult = (TextView) findViewById(R.id.quizResult);
+            quizResult.setVisibility(v.VISIBLE);
+
     }
+
 
     private void setupToolbar() {
         final ActionBar ab = getActionBarToolbar();
