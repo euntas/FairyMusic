@@ -25,6 +25,7 @@
             android:label="검사결과"
             android:parentActivityName=".ui.quote.ListActivity"/>
         <activity android:name=".ui.quote.ListActivity"/>
+        <activity android:name=".ui.result.ResultListActivity"/>
 
     </application>
 

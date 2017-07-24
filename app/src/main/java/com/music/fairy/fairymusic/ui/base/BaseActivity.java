@@ -15,6 +15,7 @@ import com.music.fairy.fairymusic.ui.ViewSamplesActivity;
 import com.music.fairy.fairymusic.ui.quote.ListActivity;
 
 import com.music.fairy.fairymusic.R;
+import com.music.fairy.fairymusic.ui.result.ResultListActivity;
 
 import static com.music.fairy.fairymusic.util.LogUtil.logD;
 import static com.music.fairy.fairymusic.util.LogUtil.makeLogTag;
@@ -114,7 +115,9 @@ public abstract class BaseActivity extends AppCompatActivity {
                 startActivity(new Intent(this, ViewSamplesActivity.class));
                 break;
             case R.id.nav_settings:
-                startActivity(new Intent(this, SettingsActivity.class));
+                Intent intent_nav = new Intent(this, ResultListActivity.class);
+               // intent_nav.putExtra("loginId", "1");
+                startActivity(intent_nav);
                 break;
         }
     }
