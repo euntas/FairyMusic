@@ -10,8 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.music.fairy.fairymusic.ui.QuizActivity;
 import com.music.fairy.fairymusic.ui.SettingsActivity;
-import com.music.fairy.fairymusic.ui.ViewSamplesActivity;
 import com.music.fairy.fairymusic.ui.quote.ListActivity;
 
 import com.music.fairy.fairymusic.R;
@@ -111,7 +111,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.nav_samples:
-                startActivity(new Intent(this, ViewSamplesActivity.class));
+                startActivity(new Intent(this, QuizActivity.class));
                 break;
             case R.id.nav_settings:
                 startActivity(new Intent(this, SettingsActivity.class));

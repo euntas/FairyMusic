@@ -18,7 +18,7 @@
         <activity android:name=".ui.quote.ArticleDetailActivity"
             android:label=""
             android:parentActivityName=".ui.quote.ListActivity"/>
-        <activity android:name=".ui.ViewSamplesActivity"
+        <activity android:name=".ui.QuizActivity"
             android:label="Quiz"
             android:parentActivityName=".ui.quote.ListActivity"/>
         <activity android:name=".ui.SettingsActivity"
