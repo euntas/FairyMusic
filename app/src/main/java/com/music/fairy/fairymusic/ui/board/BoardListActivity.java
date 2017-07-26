@@ -66,7 +66,7 @@ public class BoardListActivity  extends BaseActivity implements BArticleListFrag
         JSONArray jarray = null;
         JSONObject item = null;
         try {
-            url = new URL("localhost:8888/fairybook/app/boardList"); //203.233.196.130
+            url = new URL("http://203.233.196.130:8888/fairybook/app/boardList"); //203.233.196.130
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
