@@ -29,6 +29,8 @@
         <activity android:name=".ui.result.ResultDetailActivity"
             android:label=""
             android:parentActivityName=".ui.result.ResultListActivity"/>
+        <activity android:name=".ui.board.BoardListActivity"/>
+        <activity android:name=".ui.board.BArticleDetailActivity"/>
 
     </application>
 
