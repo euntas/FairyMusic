@@ -31,7 +31,7 @@ import java.net.URL;
 public class BoardListActivity  extends BaseActivity implements BArticleListFragment.Callback{
     /**
      * Whether or not the activity is running on a device with a large screen
-     * 
+     *
      */
     private boolean twoPaneMode;
 
