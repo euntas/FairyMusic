@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.music.fairy.fairymusic.R;
+import com.music.fairy.fairymusic.dummy.DummyContent;
 import com.music.fairy.fairymusic.ui.base.BaseActivity;
 import com.music.fairy.fairymusic.ui.quote.ArticleDetailActivity;
 import com.music.fairy.fairymusic.ui.quote.ArticleDetailFragment;
@@ -96,7 +97,7 @@ public class ResultListActivity extends BaseActivity implements ResultListFragme
                 con.setDoOutput(true); //OutputStream으로 POST 데이터를 넘겨주겠다는 옵션.
                 con.setDoInput(true); //InputStream으로 서버로 부터 응답을 받겠다는 옵션.
 
-                String request_str = "{'loginId' : 'test'}";
+                String request_str = "{'loginId' : '" + DummyContent.LOGIN_ID + "'}";
                 JSONObject requestObj = new JSONObject(request_str);
 
                 OutputStream os = con.getOutputStream(); //Request Body에 Data를 담기위해 OutputStream 객체를 생성.
@@ -131,6 +132,7 @@ public class ResultListActivity extends BaseActivity implements ResultListFragme
                     }
 
                     Log.i(TAG, mySelectionList);
+                    Log.i(TAG, DummyContent.LOGIN_ID);
 
                 }
             }
