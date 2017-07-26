@@ -6,11 +6,11 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.music.fairy.fairymusic.R;
 import com.music.fairy.fairymusic.dummy.DummyContent;
+import com.music.fairy.fairymusic.ui.board.BoardListActivity;
 
 import org.json.JSONObject;
 
@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                     // 로그인 성공시
                     if(sb.toString().equals("true")){
                         DummyContent.LOGIN_ID = textId.getText().toString();
-                        Intent intent = new Intent(this, ListActivity.class);
+                        Intent intent = new Intent(this, BoardListActivity.class);
                         startActivity(intent);
                     }
                     // 로그인 실패시
