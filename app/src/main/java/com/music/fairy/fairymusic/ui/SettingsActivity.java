@@ -1,10 +1,12 @@
 package com.music.fairy.fairymusic.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.music.fairy.fairymusic.R;
 import com.music.fairy.fairymusic.ui.base.BaseActivity;
@@ -21,6 +23,9 @@ public class SettingsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         setupToolbar();
+
+        Intent intent = getIntent();
+        Toast.makeText(this, intent.getExtras().getString("loginId"), Toast.LENGTH_SHORT).show();
     }
 
     private void setupToolbar() {
