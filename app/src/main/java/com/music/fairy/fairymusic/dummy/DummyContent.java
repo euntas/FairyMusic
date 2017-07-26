@@ -17,6 +17,8 @@ public class DummyContent {
     /**
      * An array of sample items.
      */
+    public static String LOGIN_ID = null;
+
     public static final List<DummyItem> ITEMS = new ArrayList<>();
 
     /**

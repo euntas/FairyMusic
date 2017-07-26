@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.music.fairy.fairymusic.R;
+import com.music.fairy.fairymusic.dummy.DummyContent;
 
 import org.json.JSONObject;
 
@@ -87,6 +88,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     // 로그인 성공시
                     if(sb.toString().equals("true")){
+                        DummyContent.LOGIN_ID = textId.getText().toString();
                         Intent intent = new Intent(this, ListActivity.class);
                         startActivity(intent);
                     }

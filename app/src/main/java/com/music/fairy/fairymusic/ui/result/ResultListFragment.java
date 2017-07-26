@@ -20,7 +20,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.music.fairy.fairymusic.R;
-import com.music.fairy.fairymusic.dummy.DummyContent;
+import com.music.fairy.fairymusic.ui.result.ResultContent;
 
 /**
  * Shows a list of all available quotes.
@@ -58,7 +58,7 @@ public class ResultListFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         // notify callback about the selected list item
-        callback.onItemSelected(DummyContent.ITEMS.get(position).id);
+        callback.onItemSelected(ResultContent.ITEMS.get(position).id);
     }
 
     /**
@@ -99,17 +99,17 @@ public class ResultListFragment extends ListFragment {
 
         @Override
         public int getCount() {
-            return DummyContent.ITEMS.size();
+            return ResultContent.ITEMS.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return DummyContent.ITEMS.get(position);
+            return ResultContent.ITEMS.get(position);
         }
 
         @Override
         public long getItemId(int position) {
-            return DummyContent.ITEMS.get(position).id.hashCode();
+            return ResultContent.ITEMS.get(position).id.hashCode();
         }
 
         @Override
@@ -118,11 +118,11 @@ public class ResultListFragment extends ListFragment {
                 convertView = LayoutInflater.from(getActivity()).inflate(R.layout.result_item_article, container, false);
             }
 
-            final DummyContent.DummyItem item = (DummyContent.DummyItem) getItem(position);
-            ((TextView) convertView.findViewById(R.id.result_title)).setText(item.title);
-            ((TextView) convertView.findViewById(R.id.result_subtitle)).setText(item.author);
+            final ResultContent.ResultItem item = (ResultContent.ResultItem) getItem(position);
+            ((TextView) convertView.findViewById(R.id.result_title)).setText(String.valueOf(item.selectionNum));
+            ((TextView) convertView.findViewById(R.id.result_subtitle)).setText(item.id);
             final ImageView img = (ImageView) convertView.findViewById(R.id.result_thumbnail);
-            Glide.with(getActivity()).load(item.photoId).asBitmap().fitCenter().into(new BitmapImageViewTarget(img) {
+            Glide.with(getActivity()).load(R.drawable.ryan1).asBitmap().fitCenter().into(new BitmapImageViewTarget(img) {
                 @Override
                 protected void setResource(Bitmap resource) {
                     RoundedBitmapDrawable circularBitmapDrawable = RoundedBitmapDrawableFactory.create(getActivity().getResources(), resource);

@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.music.fairy.fairymusic.dummy.DummyContent;
 import com.music.fairy.fairymusic.ui.QuizActivity;
 import com.music.fairy.fairymusic.ui.SettingsActivity;
 import com.music.fairy.fairymusic.ui.quote.ListActivity;

@@ -26,6 +26,9 @@
             android:parentActivityName=".ui.quote.ListActivity"/>
         <activity android:name=".ui.quote.ListActivity"/>
         <activity android:name=".ui.result.ResultListActivity"/>
+        <activity android:name=".ui.result.ResultDetailActivity"
+            android:label=""
+            android:parentActivityName=".ui.result.ResultListActivity"/>
 
     </application>
 
