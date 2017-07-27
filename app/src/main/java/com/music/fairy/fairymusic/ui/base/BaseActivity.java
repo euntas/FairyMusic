@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import com.music.fairy.fairymusic.dummy.DummyContent;
 import com.music.fairy.fairymusic.ui.QuizActivity;
 import com.music.fairy.fairymusic.ui.SettingsActivity;
+import com.music.fairy.fairymusic.ui.board.BoardListActivity;
 import com.music.fairy.fairymusic.ui.quote.ListActivity;
 
 import com.music.fairy.fairymusic.R;
@@ -109,16 +110,18 @@ public abstract class BaseActivity extends AppCompatActivity {
     private void goToNavDrawerItem(int item) {
         switch (item) {
             case R.id.nav_quotes:
-                startActivity(new Intent(this, ListActivity.class));
+                startActivity(new Intent(this, BoardListActivity.class));
                 finish();
                 break;
             case R.id.nav_samples:
                 startActivity(new Intent(this, QuizActivity.class));
+                finish();
                 break;
             case R.id.nav_settings:
                 Intent intent_nav = new Intent(this, ResultListActivity.class);
                // intent_nav.putExtra("loginId", "1");
                 startActivity(intent_nav);
+                finish();
                 break;
         }
     }

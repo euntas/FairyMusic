@@ -24,6 +24,10 @@ public class ResultContent {
      */
     public static final Map<String, ResultItem> ITEM_MAP = new HashMap<>(2);
 
+    public static Map<String, String> MBTI = new HashMap<>(2);
+
+    public static Map<String, FBResource> HTP = new HashMap<>(3);
+
     static {
         addItem(new ResultItem("1", 621));
         addItem(new ResultItem("2", 496));
@@ -37,6 +41,11 @@ public class ResultContent {
     public static void clearItem(){
         ITEMS.clear();
         ITEM_MAP.clear();
+    }
+
+    public static void clearAllItem(){
+        MBTI.clear();
+        HTP.clear();
     }
 
     public static class ResultItem {

@@ -92,6 +92,13 @@ public class LoginActivity extends AppCompatActivity {
                         Intent intent = new Intent(this, BoardListActivity.class);
                         startActivity(intent);
                     }
+
+                    else if(sb.toString().equals("child")){
+                        textId.setText("");
+                        textPassword.setText("");
+                        Toast.makeText(this, "보호자용으로 로그인해주세요!", Toast.LENGTH_SHORT).show();
+                    }
+
                     // 로그인 실패시
                     else{
                         textId.setText("");

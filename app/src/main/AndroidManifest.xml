@@ -1,40 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.music.fairy.fairymusic">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.Main">
-
         <activity android:name=".ui.quote.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ui.quote.ArticleDetailActivity"
+        <activity
+            android:name=".ui.quote.ArticleDetailActivity"
             android:label=""
-            android:parentActivityName=".ui.quote.ListActivity"/>
-        <activity android:name=".ui.QuizActivity"
+            android:parentActivityName=".ui.quote.ListActivity" />
+        <activity
+            android:name=".ui.QuizActivity"
             android:label="Quiz"
-            android:parentActivityName=".ui.quote.ListActivity"/>
-        <activity android:name=".ui.SettingsActivity"
+            android:parentActivityName=".ui.quote.ListActivity" />
+        <activity
+            android:name=".ui.SettingsActivity"
             android:label="검사결과"
-            android:parentActivityName=".ui.quote.ListActivity"/>
-        <activity android:name=".ui.quote.ListActivity"/>
-        <activity android:name=".ui.result.ResultListActivity"/>
-        <activity android:name=".ui.result.ResultDetailActivity"
+            android:parentActivityName=".ui.quote.ListActivity" />
+        <activity android:name=".ui.quote.ListActivity" />
+        <activity android:name=".ui.result.ResultListActivity" />
+        <activity
+            android:name=".ui.result.ResultDetailActivity"
             android:label=""
-            android:parentActivityName=".ui.result.ResultListActivity"/>
-        <activity android:name=".ui.board.BoardListActivity"/>
-        <activity android:name=".ui.board.BArticleDetailActivity"/>
-
+            android:parentActivityName=".ui.result.ResultListActivity" />
+        <activity android:name=".ui.board.BoardListActivity" />
+        <activity android:name=".ui.board.BArticleDetailActivity" />
+        <activity android:name=".dummy.PieChartActivity"></activity>
     </application>
-
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>

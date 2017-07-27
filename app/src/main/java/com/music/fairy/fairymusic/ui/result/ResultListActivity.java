@@ -143,6 +143,8 @@ public class ResultListActivity extends BaseActivity implements ResultListFragme
         }
     }
 
+
+
     /**
      * Called when an item has been selected
      *
@@ -157,7 +159,11 @@ public class ResultListActivity extends BaseActivity implements ResultListFragme
         } else {
             // Start the detail activity in single pane mode.
             Intent detailIntent = new Intent(this, ResultDetailActivity.class);
-            detailIntent.putExtra(ArticleDetailFragment.ARG_ITEM_ID, id);
+            detailIntent.putExtra(ResultDetailFragment.ARG_ITEM_ID, id);
+            detailIntent.putExtra("id", id);
+
+            //setMbti(Integer.parseInt(id));
+
             startActivity(detailIntent);
         }
     }
@@ -177,7 +183,7 @@ public class ResultListActivity extends BaseActivity implements ResultListFragme
      * Enables the functionality that selected items are automatically highlighted.
      */
     private void enableActiveItemState() {
-        ResultListFragment fragmentById = (ResultListFragment) getFragmentManager().findFragmentById(R.id.article_list);
+        ResultListFragment fragmentById = (ResultListFragment) getFragmentManager().findFragmentById(R.id.result_list);
         fragmentById.getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
     }
 

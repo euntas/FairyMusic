@@ -1,8 +1,10 @@
 package com.music.fairy.fairymusic.ui.result;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,12 +13,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.music.fairy.fairymusic.R;
 import com.music.fairy.fairymusic.dummy.DummyContent;
 import com.music.fairy.fairymusic.ui.base.BaseActivity;
 import com.music.fairy.fairymusic.ui.base.BaseFragment;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
+
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
 
 import butterknife.Bind;
 
@@ -37,11 +56,35 @@ public class ResultDetailFragment extends BaseFragment {
      */
     private ResultContent.ResultItem resultItem;
 
+    @Bind(R.id.chart_color)
+    PieChart pieChart;
+
     @Bind(R.id.quote)
     TextView quote;
 
     @Bind(R.id.author)
     TextView author;
+
+    @Bind(R.id.mbti_title)
+    TextView mbti_title;
+
+    @Bind(R.id.mbti_content)
+    TextView mbti_content;
+
+    @Bind(R.id.htp_tree_title)
+    TextView htp_tree_title;
+
+    @Bind(R.id.htp_tree_content)
+    TextView htp_tree_content;
+
+    @Bind(R.id.img_tree)
+    ImageView img_tree;
+
+    @Bind(R.id.htp_house_title)
+    TextView htp_house_title;
+
+    @Bind(R.id.htp_house_content)
+    TextView htp_house_content;
 
     @Bind(R.id.backdrop)
     ImageView backdropImg;
@@ -59,11 +102,12 @@ public class ResultDetailFragment extends BaseFragment {
         }
 
         setHasOptionsMenu(true);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflateAndBind(inflater, container, R.layout.fragment_article_detail);
+        View rootView = inflateAndBind(inflater, container, R.layout.fragment_result_detail);
 
         if (!((BaseActivity) getActivity()).providesActivityToolbar()) {
             // No Toolbar present. Set include_toolbar:
@@ -73,11 +117,87 @@ public class ResultDetailFragment extends BaseFragment {
         if (resultItem != null) {
             loadBackdrop();
             collapsingToolbar.setTitle("셀넘:" + String.valueOf(resultItem.selectionNum));
-            author.setText("...");
-            quote.setText("ㅇㅇㅇㅇㅇㅇㅇ");
+
+            setColorResult();
+
+            setMBTIResult();
+
+            setHTPResult();
         }
 
         return rootView;
+    }
+
+    public void setColorResult(){
+        author.setText("색채검사");
+        quote.setText("ㅇㅇㅇㅇㅇㅇㅇ");
+
+        ArrayList<Entry> entries = new ArrayList<>();
+        entries.add(new Entry(4f, 0));
+        entries.add(new Entry(8f, 1));
+        entries.add(new Entry(6f, 2));
+        entries.add(new Entry(12f, 3));
+        entries.add(new Entry(18f, 4));
+        entries.add(new Entry(9f, 5));
+
+        PieDataSet dataset = new PieDataSet(entries, "# of Calls");
+
+        ArrayList<String> labels = new ArrayList<String>();
+        labels.add("January");
+        labels.add("February");
+        labels.add("March");
+        labels.add("April");
+        labels.add("May");
+        labels.add("June");
+
+        PieData data = new PieData(labels, dataset);
+        dataset.setColors(ColorTemplate.COLORFUL_COLORS);
+        pieChart.setTransparentCircleRadius(24f);
+        pieChart.setHoleRadius(24f);
+        pieChart.setDescription("Description");
+        pieChart.setData(data);
+
+        pieChart.animateY(5000);
+    }
+
+    public void setMBTIResult(){
+        mbti_title.setText("MBTI 결과");
+        String mbtiType = ResultContent.MBTI.get("mbtiType").toString();
+        String mbtiAnalysis = ResultContent.MBTI.get("mbtiAnalysis").toString();
+        mbti_content.setText(mbtiType + " : " + mbtiAnalysis);
+    }
+
+    public void setHTPResult(){
+        htp_tree_title.setText("HTP - 나무 결과");
+        htp_tree_content.setText(ResultContent.HTP.get("htpTree").getAnalysis());
+
+        switch (ResultContent.HTP.get("htpTree").getName()){
+            case "yard01":
+                img_tree.setImageResource(R.drawable.yard01);
+                break;
+            case "yard02":
+                img_tree.setImageResource(R.drawable.yard02);
+                break;
+            case "yard03":
+                img_tree.setImageResource(R.drawable.yard03);
+                break;
+            case "yard04":
+                img_tree.setImageResource(R.drawable.yard04);
+                break;
+            case "yard05":
+                img_tree.setImageResource(R.drawable.yard05);
+                break;
+            case "yard06":
+                img_tree.setImageResource(R.drawable.yard06);
+                break;
+            case "yard07":
+                img_tree.setImageResource(R.drawable.yard07);
+                break;
+            case "yard08":
+                img_tree.setImageResource(R.drawable.yard08);
+                break;
+        }
+
     }
 
     private void loadBackdrop() {
