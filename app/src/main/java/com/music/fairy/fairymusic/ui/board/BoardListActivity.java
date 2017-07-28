@@ -18,6 +18,7 @@ import com.music.fairy.fairymusic.util.LogUtil;
 
 /**
  * Created by KITA on 2017-07-24.
+ * 글목록
  */
 
 public class BoardListActivity extends BaseActivity implements BArticleListFragment.Callback{
