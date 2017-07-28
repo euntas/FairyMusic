@@ -31,6 +31,7 @@
             android:parentActivityName=".ui.result.ResultListActivity"/>
         <activity android:name=".ui.board.BoardListActivity"/>
         <activity android:name=".ui.board.BArticleDetailActivity"/>
+        <activity android:name=".ui.board.BoardWriteActivity"/>
 
     </application>
 

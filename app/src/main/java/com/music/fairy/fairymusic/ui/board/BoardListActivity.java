@@ -6,6 +6,8 @@ import android.os.StrictMode;
 import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -14,21 +16,11 @@ import com.music.fairy.fairymusic.dummy.BoardContent;
 import com.music.fairy.fairymusic.ui.base.BaseActivity;
 import com.music.fairy.fairymusic.util.LogUtil;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 /**
  * Created by KITA on 2017-07-24.
  */
 
-public class BoardListActivity  extends BaseActivity implements BArticleListFragment.Callback{
+public class BoardListActivity extends BaseActivity implements BArticleListFragment.Callback{
     /**
      * Whether or not the activity is running on a device with a large screen
      *
@@ -47,6 +39,14 @@ public class BoardListActivity  extends BaseActivity implements BArticleListFrag
 
         setupToolbar();
 
+        Button btnWrite = (Button) findViewById(R.id.btnWrite);
+        btnWrite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(BoardListActivity.this, BoardWriteActivity.class));
+            }
+        });
+
         if (isTwoPaneLayoutUsed()) {
             twoPaneMode = true;
             LogUtil.logD("TEST","TWO POANE TASDFES");
@@ -55,61 +55,6 @@ public class BoardListActivity  extends BaseActivity implements BArticleListFrag
 
         if (savedInstanceState == null && twoPaneMode) {
             setupDetailFragment();
-        }
-    }
-
-    public void setList(){
-        URL url = null;
-        HttpURLConnection con = null;
-        StringBuilder sb = new StringBuilder();
-        JSONObject json = null;
-        JSONArray jarray = null;
-        JSONObject item = null;
-        try {
-            url = new URL("http://203.233.196.130:8888/fairybook/app/boardList"); //203.233.196.130
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        try {
-            con = (HttpURLConnection) url.openConnection();
-            if (con != null){
-                con.setConnectTimeout(1000000);
-                con.setUseCaches(false);
-                con.setRequestMethod("POST");
-                con.setRequestProperty("Content-Type","application/json");
-                con.setDoOutput(true);
-                con.setDoInput(true);
-                if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                    InputStreamReader in = new InputStreamReader(con.getInputStream());
-                    int ch;
-                    while((ch = in.read()) != -1){
-                        sb.append((char) ch);
-                    }
-                    in.close();
-                    String jsontext = sb.toString();
-                    String jt = jsontext;
-                    if (jt != null) {
-                        try {
-                            json = new JSONObject(jt);
-                            jarray = json.getJSONArray("boardList");
-                            //StringBuilder sb2 = new StringBuilder();
-                            for (int i = 0; i < jarray.length(); i++) {
-                                item = jarray.getJSONObject(i);
-
-                                BoardContent.BoardItem bi = new BoardContent.BoardItem(item.getInt("boardnum"), R.drawable.ryan1, item.getString("id"), item.getString("title")
-                                        , item.getString("content"), item.getString("inputdate"),item.getInt("hit"));
-                                System.out.println(bi.toString());
-
-                            }
-                            //textview.setText(sb2.toString());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
