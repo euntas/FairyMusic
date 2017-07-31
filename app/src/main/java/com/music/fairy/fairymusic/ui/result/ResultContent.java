@@ -28,6 +28,8 @@ public class ResultContent {
 
     public static Map<String, FBResource> HTP = new HashMap<>(3);
 
+    public static Map<Integer, ColorInfo> COLOR = new HashMap<>(10);
+
     static {
         addItem(new ResultItem("1", 621));
         addItem(new ResultItem("2", 496));
@@ -46,6 +48,7 @@ public class ResultContent {
     public static void clearAllItem(){
         MBTI.clear();
         HTP.clear();
+        COLOR.clear();
     }
 
     public static class ResultItem {
@@ -55,6 +58,18 @@ public class ResultContent {
         public ResultItem(String id, int selectionNum) {
             this.id = id;
             this.selectionNum = selectionNum;
+        }
+    }
+
+    public static class ColorInfo{
+        public String colorName;
+        public String colorAnalysis;
+        public int colorCount;
+
+        public ColorInfo(String colorName, String colorAnalysis, int colorCount) {
+            this.colorName = colorName;
+            this.colorAnalysis = colorAnalysis;
+            this.colorCount = colorCount;
         }
     }
 }

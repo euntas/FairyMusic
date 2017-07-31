@@ -63,6 +63,13 @@
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content">
 
+                 <TextView
+                     android:id="@+id/author"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                     />
+
                  <LinearLayout
                      android:layout_width="match_parent"
                      android:layout_height="350dp">
@@ -75,17 +82,11 @@
                  </LinearLayout>
 
                  <TextView
-                     android:id="@+id/author"
+                     android:id="@+id/quote"
+                     android:text="설명을 원하는 색을 클릭해 주세요."
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content"
-                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                     />
-
-                 <TextView
-                     android:id="@+id/quote"
-                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"/>
+                     android:layout_marginTop="30dp"/>
 
              </LinearLayout>
 

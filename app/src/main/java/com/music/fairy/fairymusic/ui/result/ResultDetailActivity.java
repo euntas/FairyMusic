@@ -4,17 +4,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.music.fairy.fairymusic.R;
 import com.music.fairy.fairymusic.ui.base.BaseActivity;
 import com.music.fairy.fairymusic.ui.quote.ArticleDetailFragment;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.InputStreamReader;
@@ -32,6 +36,7 @@ import java.util.ArrayList;
 public class ResultDetailActivity extends BaseActivity {
 
     String MBTIInfo = null;
+    PieChart pieChart = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +65,25 @@ public class ResultDetailActivity extends BaseActivity {
 
         setMbti(selectionNum);
         setHTPTree(selectionNum);
+        pieChart = (PieChart)findViewById(R.id.chart_color);
         setColor(selectionNum);
-
 
         ResultDetailFragment fragment =  ResultDetailFragment.newInstance(getIntent().getStringExtra(ResultDetailFragment.ARG_ITEM_ID));
         getFragmentManager().beginTransaction().replace(R.id.result_detail_container, fragment).commit();
 
+       // pieChart.setOnChartValueSelectedListener(this);
+
     }
+
+   /* @Override
+    public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
+        Log.i("chart", e.getData().toString()  + " " + dataSetIndex);
+    }
+
+    @Override
+    public void onNothingSelected() {
+        Log.i("chart", "nothing");
+    }*/
 
     public void setColor(int selectionNum){
         URL url = null;
@@ -79,13 +96,13 @@ public class ResultDetailActivity extends BaseActivity {
         }catch (MalformedURLException e){
             Log.i("RDF merr", e.toString());
         }
-        try{
-            con = (HttpURLConnection)url.openConnection();
-            if(con != null){
+        try {
+            con = (HttpURLConnection) url.openConnection();
+            if (con != null) {
                 con.setConnectTimeout(10000); //연결제한시간. 0은 무한대기.
                 con.setUseCaches(false); //캐쉬 사용여부
                 con.setRequestMethod("POST"); //요청방식 선택 (GET, POST)
-                con.setRequestProperty("Content-Type","application/json");
+                con.setRequestProperty("Content-Type", "application/json");
                 con.setDoOutput(true); //OutputStream으로 POST 데이터를 넘겨주겠다는 옵션.
                 con.setDoInput(true); //InputStream으로 서버로 부터 응답을 받겠다는 옵션.
 
@@ -112,6 +129,13 @@ public class ResultDetailActivity extends BaseActivity {
                     Log.i("RDA", "받아온거: " + sb.toString());
 
                     JSONObject jo = new JSONObject(sb.toString());
+                    JSONArray colorName = jo.getJSONArray("colorName");
+                    JSONArray colorAnalysis = jo.getJSONArray("colorAnalysis");
+                    JSONArray colorCount = jo.getJSONArray("colorCount");
+
+                    for (int i = 0; i < colorName.length(); i++) {
+                        ResultContent.COLOR.put(i, new ResultContent.ColorInfo(colorName.getString(i), colorAnalysis.getString(i), colorCount.getInt(i)));
+                    }
 
                 }
             }
@@ -119,7 +143,9 @@ public class ResultDetailActivity extends BaseActivity {
         catch (Exception e){
             Log.i("RDF", e.toString());
         }
+
     }
+
 
     public void setMbti(int selectionNum){
         Log.i("MBTI", "들어왔음" + selectionNum);

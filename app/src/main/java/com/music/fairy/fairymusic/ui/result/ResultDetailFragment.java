@@ -20,6 +20,8 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.music.fairy.fairymusic.R;
 import com.music.fairy.fairymusic.dummy.DummyContent;
@@ -44,7 +46,7 @@ import butterknife.Bind;
  *
  * Created by Andreas Schrade on 14.12.2015.
  */
-public class ResultDetailFragment extends BaseFragment {
+public class ResultDetailFragment extends BaseFragment implements OnChartValueSelectedListener{
 
     /**
      * The argument represents the dummy item ID of this fragment.
@@ -129,35 +131,54 @@ public class ResultDetailFragment extends BaseFragment {
     }
 
     public void setColorResult(){
-        author.setText("색채검사");
-        quote.setText("ㅇㅇㅇㅇㅇㅇㅇ");
 
         ArrayList<Entry> entries = new ArrayList<>();
-        entries.add(new Entry(4f, 0));
-        entries.add(new Entry(8f, 1));
-        entries.add(new Entry(6f, 2));
-        entries.add(new Entry(12f, 3));
-        entries.add(new Entry(18f, 4));
-        entries.add(new Entry(9f, 5));
+        // entries.add(new Entry(4f, 0));
+        for(int i=0; i<ResultContent.COLOR.size(); i++){
+            entries.add(new Entry(ResultContent.COLOR.get(i).colorCount, i, ResultContent.COLOR.get(i).colorName));
+        }
+
 
         PieDataSet dataset = new PieDataSet(entries, "# of Calls");
 
         ArrayList<String> labels = new ArrayList<String>();
-        labels.add("January");
-        labels.add("February");
-        labels.add("March");
-        labels.add("April");
-        labels.add("May");
-        labels.add("June");
+        // labels.add("January");
+        for(int i=0; i<ResultContent.COLOR.size(); i++){
+            labels.add(ResultContent.COLOR.get(i).colorName);
+        }
+
 
         PieData data = new PieData(labels, dataset);
         dataset.setColors(ColorTemplate.COLORFUL_COLORS);
-        pieChart.setTransparentCircleRadius(24f);
-        pieChart.setHoleRadius(24f);
+
+//        pieChart.setTransparentCircleRadius(24f);
+        //       pieChart.setHoleRadius(24f);
         pieChart.setDescription("Description");
         pieChart.setData(data);
 
         pieChart.animateY(5000);
+
+
+        pieChart.setOnChartValueSelectedListener(this);
+
+        //TextView author = (TextView)findViewById(R.id.author);
+        author.setText("색채검사");
+        //TextView quote = (TextView)findViewById(R.id.quote);
+        quote.setText(ResultContent.COLOR.get(0).colorAnalysis);
+    }
+
+    @Override
+    public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
+        for(int i=0; i<ResultContent.COLOR.size(); i++){
+            if( e.getData().toString().equals(ResultContent.COLOR.get(i).colorName)){
+                quote.setText(ResultContent.COLOR.get(i).colorName + " : " + ResultContent.COLOR.get(i).colorAnalysis);
+            }
+        }
+    }
+
+    @Override
+    public void onNothingSelected() {
+        Log.i("chart", "nothing");
     }
 
     public void setMBTIResult(){

@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.music.fairy.fairymusic.dummy.DummyContent;
 import com.music.fairy.fairymusic.ui.QuizActivity;
 import com.music.fairy.fairymusic.ui.SettingsActivity;
@@ -29,7 +30,7 @@ import static com.music.fairy.fairymusic.util.LogUtil.makeLogTag;
  *
  * Created by Andreas Schrade on 14.12.2015.
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity  {
     private static final String TAG = makeLogTag(BaseActivity.class);
 
     protected static final int NAV_DRAWER_ITEM_INVALID = -1;
