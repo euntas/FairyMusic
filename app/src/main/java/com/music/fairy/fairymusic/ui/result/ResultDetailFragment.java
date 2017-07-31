@@ -161,10 +161,7 @@ public class ResultDetailFragment extends BaseFragment implements OnChartValueSe
 
         pieChart.setOnChartValueSelectedListener(this);
 
-        //TextView author = (TextView)findViewById(R.id.author);
         author.setText("색채검사");
-        //TextView quote = (TextView)findViewById(R.id.quote);
-        quote.setText(ResultContent.COLOR.get(0).colorAnalysis);
     }
 
     @Override

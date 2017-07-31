@@ -71,19 +71,8 @@ public class ResultDetailActivity extends BaseActivity {
         ResultDetailFragment fragment =  ResultDetailFragment.newInstance(getIntent().getStringExtra(ResultDetailFragment.ARG_ITEM_ID));
         getFragmentManager().beginTransaction().replace(R.id.result_detail_container, fragment).commit();
 
-       // pieChart.setOnChartValueSelectedListener(this);
-
     }
 
-   /* @Override
-    public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
-        Log.i("chart", e.getData().toString()  + " " + dataSetIndex);
-    }
-
-    @Override
-    public void onNothingSelected() {
-        Log.i("chart", "nothing");
-    }*/
 
     public void setColor(int selectionNum){
         URL url = null;
