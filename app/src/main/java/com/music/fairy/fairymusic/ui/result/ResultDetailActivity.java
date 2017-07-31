@@ -75,7 +75,7 @@ public class ResultDetailActivity extends BaseActivity {
 
         try{
             // http://203.233.196.130:8888/webre/
-            url = new URL("http://203.233.196.130:8888/fairybook/app/");
+            url = new URL("http://203.233.196.130:8888/fairybook/app/getColorResult");
         }catch (MalformedURLException e){
             Log.i("RDF merr", e.toString());
         }
