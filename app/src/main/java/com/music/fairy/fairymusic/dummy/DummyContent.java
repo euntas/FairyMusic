@@ -19,6 +19,10 @@ public class DummyContent {
      */
     public static String LOGIN_ID = null;
 
+    public static int STORYNUM = 1;
+
+    public static String STORYDATE = null;
+
     public static final List<DummyItem> ITEMS = new ArrayList<>();
 
     /**

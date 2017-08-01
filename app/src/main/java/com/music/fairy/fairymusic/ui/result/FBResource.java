@@ -14,6 +14,12 @@ public class FBResource {
         // TODO Auto-generated constructor stub
     }
 
+    public FBResource(String name, String analysis) {
+        super();
+        this.name = name;
+        this.analysis = analysis;
+    }
+
     public FBResource(int resourceNum, String name, String analysis) {
         super();
         this.resourceNum = resourceNum;

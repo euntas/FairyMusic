@@ -2,6 +2,8 @@ package com.music.fairy.fairymusic.ui.result;
 
 import com.music.fairy.fairymusic.R;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +28,8 @@ public class ResultContent {
 
     public static Map<String, String> MBTI = new HashMap<>(2);
 
+    public static Map<String, FBResource> HOUSE = new HashMap<>(5);
+
     public static Map<String, FBResource> HTP = new HashMap<>(3);
 
     public static Map<Integer, ColorInfo> COLOR = new HashMap<>(10);
@@ -49,15 +53,27 @@ public class ResultContent {
         MBTI.clear();
         HTP.clear();
         COLOR.clear();
+        HOUSE.clear();
     }
 
     public static class ResultItem {
         public final String id;
         public final int selectionNum;
+        public String startDate;
+        public String endDate;
+        public int storyNum;
 
         public ResultItem(String id, int selectionNum) {
             this.id = id;
             this.selectionNum = selectionNum;
+        }
+
+        public ResultItem(String id, int selectionNum, String startDate, String endDate, int storyNum) {
+            this.id = id;
+            this.selectionNum = selectionNum;
+            this.startDate = startDate;
+            this.endDate = endDate;
+            this.storyNum = storyNum;
         }
     }
 

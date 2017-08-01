@@ -128,7 +128,7 @@ public class ResultListActivity extends BaseActivity implements ResultListFragme
                         int selNum = jo.getInt("selectionNum");
                         String selectionNum = String.valueOf(selNum);
 
-                        ResultContent.addItem(new ResultContent.ResultItem(selectionNum, selNum));
+                        ResultContent.addItem(new ResultContent.ResultItem(selectionNum, selNum, jo.getString("startDate"), jo.getString("endDate"), jo.getInt("storyNum")));
                     }
 
                     Log.i(TAG, mySelectionList);

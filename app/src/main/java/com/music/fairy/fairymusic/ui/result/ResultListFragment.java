@@ -119,8 +119,21 @@ public class ResultListFragment extends ListFragment {
             }
 
             final ResultContent.ResultItem item = (ResultContent.ResultItem) getItem(position);
-            ((TextView) convertView.findViewById(R.id.result_title)).setText(String.valueOf(item.selectionNum));
-            ((TextView) convertView.findViewById(R.id.result_subtitle)).setText(item.id);
+            if(item.storyNum == 1){
+                ((TextView) convertView.findViewById(R.id.result_title)).setText( "헨젤과 그레텔 - " + String.valueOf(item.selectionNum) + "회");
+                ((TextView) convertView.findViewById(R.id.result_subtitle)).setText(item.startDate + " ~ " + item.endDate);
+            }
+
+            else if(item.storyNum == 2){
+                ((TextView) convertView.findViewById(R.id.result_title)).setText( "백설공주 - " + String.valueOf(item.selectionNum) + "회");
+                ((TextView) convertView.findViewById(R.id.result_subtitle)).setText(item.id);
+            }
+
+            else{
+                ((TextView) convertView.findViewById(R.id.result_title)).setText(String.valueOf(item.selectionNum));
+                ((TextView) convertView.findViewById(R.id.result_subtitle)).setText(item.id);
+            }
+
             final ImageView img = (ImageView) convertView.findViewById(R.id.result_thumbnail);
             Glide.with(getActivity()).load(R.drawable.ryan1).asBitmap().fitCenter().into(new BitmapImageViewTarget(img) {
                 @Override

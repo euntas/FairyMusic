@@ -67,6 +67,7 @@ public class ResultDetailActivity extends BaseActivity {
         setHTPTree(selectionNum);
         pieChart = (PieChart)findViewById(R.id.chart_color);
         setColor(selectionNum);
+        setHouse(selectionNum);
 
         ResultDetailFragment fragment =  ResultDetailFragment.newInstance(getIntent().getStringExtra(ResultDetailFragment.ARG_ITEM_ID));
         getFragmentManager().beginTransaction().replace(R.id.result_detail_container, fragment).commit();
@@ -242,6 +243,80 @@ public class ResultDetailActivity extends BaseActivity {
 
                     FBResource resObj = new FBResource(jo.getInt("resourceNum"), jo.getString("name"), jo.getString("analysis"));
                     ResultContent.HTP.put("htpTree", resObj);
+
+                }
+            }
+        }
+        catch (Exception e){
+            Log.i("RDF", e.toString());
+        }
+    }
+
+    public void setHouse(int selectionNum){
+        URL url = null;
+        HttpURLConnection con = null;
+        StringBuilder sb = new StringBuilder();
+
+        try{
+            // http://203.233.196.130:8888/webre/
+            url = new URL("http://203.233.196.130:8888/fairybook/app/getHouseResult");
+        }catch (MalformedURLException e){
+            Log.i("RDF err", e.toString());
+        }
+        try{
+            con = (HttpURLConnection)url.openConnection();
+            if(con != null){
+                con.setConnectTimeout(10000); //연결제한시간. 0은 무한대기.
+                con.setUseCaches(false); //캐쉬 사용여부
+                con.setRequestMethod("POST"); //요청방식 선택 (GET, POST)
+                con.setRequestProperty("Content-Type","application/json");
+                con.setDoOutput(true); //OutputStream으로 POST 데이터를 넘겨주겠다는 옵션.
+                con.setDoInput(true); //InputStream으로 서버로 부터 응답을 받겠다는 옵션.
+
+                String request_str = "{'selectionNum' : '" + selectionNum + "'}";
+                JSONObject requestObj = new JSONObject(request_str);
+
+                OutputStream os = con.getOutputStream(); //Request Body에 Data를 담기위해 OutputStream 객체를 생성.
+                os.write(requestObj.toString().getBytes());
+                os.flush();
+                os.close();
+
+                if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader in = new InputStreamReader(con.getInputStream());
+
+                    int ch;
+
+                    // 웹서버에서 반환값 받아오기
+                    while ((ch = in.read()) != -1) {
+                        sb.append((char) ch);
+                    }
+
+                    in.close();
+
+                    //Log.i("RDA", "받아온거: " + sb.toString());
+
+                    JSONObject jo = new JSONObject(sb.toString());
+                    Log.i("RDA", "받아온거: " + jo.toString());
+
+                    JSONObject jo2 = (JSONObject) jo.get("roof");
+                    FBResource resObj = new FBResource(jo2.getString("name"), jo2.getString("analysis"));
+                    ResultContent.HOUSE.put("roof", resObj);
+
+                    jo2 = (JSONObject) jo.get("window");
+                    resObj = new FBResource(jo2.getString("name"), jo2.getString("analysis"));
+                    ResultContent.HOUSE.put("window", resObj);
+
+                    jo2 = (JSONObject) jo.get("chimney");
+                    resObj = new FBResource(jo2.getString("name"), jo2.getString("analysis"));
+                    ResultContent.HOUSE.put("chimney", resObj);
+
+                    jo2 = (JSONObject) jo.get("wall");
+                    resObj = new FBResource(jo2.getString("name"), jo2.getString("analysis"));
+                    ResultContent.HOUSE.put("wall", resObj);
+
+                    jo2 = (JSONObject) jo.get("door");
+                    resObj = new FBResource(jo2.getString("name"), jo2.getString("analysis"));
+                    ResultContent.HOUSE.put("door", resObj);
 
                 }
             }

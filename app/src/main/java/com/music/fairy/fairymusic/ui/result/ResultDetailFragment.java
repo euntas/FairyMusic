@@ -29,6 +29,7 @@ import com.music.fairy.fairymusic.ui.base.BaseActivity;
 import com.music.fairy.fairymusic.ui.base.BaseFragment;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
@@ -88,6 +89,21 @@ public class ResultDetailFragment extends BaseFragment implements OnChartValueSe
     @Bind(R.id.htp_house_content)
     TextView htp_house_content;
 
+    @Bind(R.id.img_chimney)
+    ImageView img_chimney;
+
+    @Bind(R.id.img_door)
+    ImageView img_door;
+
+    @Bind(R.id.img_roof)
+    ImageView img_roof;
+
+    @Bind(R.id.img_wall)
+    ImageView img_wall;
+
+    @Bind(R.id.img_window)
+    ImageView img_window;
+
     @Bind(R.id.backdrop)
     ImageView backdropImg;
 
@@ -125,6 +141,8 @@ public class ResultDetailFragment extends BaseFragment implements OnChartValueSe
             setMBTIResult();
 
             setHTPResult();
+
+            setHouseResult();
         }
 
         return rootView;
@@ -215,6 +233,194 @@ public class ResultDetailFragment extends BaseFragment implements OnChartValueSe
                 img_tree.setImageResource(R.drawable.yard08);
                 break;
         }
+
+    }
+
+    public void setHouseResult(){
+        StringBuilder resultStr = new StringBuilder();
+
+        // 지붕의 경우
+        FBResource roof = ResultContent.HOUSE.get("roof");
+
+        if(roof.getName().equals("roof01Red")){
+            img_roof.setImageResource(R.drawable.roof01red);
+        }
+
+        else if(roof.getName().equals("roof01Orange")){
+            img_roof.setImageResource(R.drawable.roof01orange);
+        }
+
+        else if(roof.getName().equals("roof01Yellow") ){
+            img_roof.setImageResource(R.drawable.roof01yellow);
+        }
+
+        else if(roof.getName().equals("roof01Green") ){
+            img_roof.setImageResource(R.drawable.roof01green);
+        }
+
+        else if(roof.getName().equals("roof01Blue") ){
+            img_roof.setImageResource(R.drawable.roof01blue);
+        }
+
+        else if(roof.getName().equals("roof01Purple") ){
+            img_roof.setImageResource(R.drawable.roof01purple);
+        }
+
+        else if(roof.getName().equals("roof01White") ){
+            img_roof.setImageResource(R.drawable.roof01white);
+        }
+
+        else if(roof.getName().equals("roof01Black") ){
+            img_roof.setImageResource(R.drawable.roof01black);
+        }
+
+        else if(roof.getName().equals("roof01Gray")){
+            img_roof.setImageResource(R.drawable.roof01gray);
+        }
+
+        else if(roof.getName().equals("roof02Red") ){
+            img_roof.setImageResource(R.drawable.roof02red);
+        }
+
+        else if(roof.getName().equals("roof02Orange") ){
+            img_roof.setImageResource(R.drawable.roof02orange);
+        }
+
+        else if(roof.getName().equals("roof02Yellow") ){
+            img_roof.setImageResource(R.drawable.roof02yellow);
+        }
+
+        else if(roof.getName().equals("roof02Green") ){
+            img_roof.setImageResource(R.drawable.roof02green);
+        }
+
+        else if(roof.getName().equals("roof02Blue") ){
+            img_roof.setImageResource(R.drawable.roof02blue);
+        }
+
+        else if(roof.getName().equals("roof02Purple") ){
+            img_roof.setImageResource(R.drawable.roof02purple);
+        }
+
+        else if(roof.getName().equals("roof02White") ){
+            img_roof.setImageResource(R.drawable.roof02white);
+        }
+
+        else if(roof.getName().equals("roof02Black") ){
+            img_roof.setImageResource(R.drawable.roof02black);
+        }
+
+        else if(roof.getName().equals("roof02Gray") ){
+            img_roof.setImageResource(R.drawable.roof02gray);
+        }
+
+        resultStr.append("지붕 : " + roof.getAnalysis() + "\n");
+
+        // 창문
+        FBResource window = ResultContent.HOUSE.get("window");
+
+        if(window.getName().equals("window01")){
+            img_window.setImageResource(R.drawable.window01);
+        }
+
+        else if(window.getName().equals("window02")){
+            img_window.setImageResource(R.drawable.window02);
+        }
+
+        else if(window.getName().equals("window03")){
+            img_window.setImageResource(R.drawable.window03);
+        }
+
+        else if(window.getName().equals("window04")){
+            img_window.setImageResource(R.drawable.window04);
+        }
+
+        resultStr.append("창문 : " + window.getAnalysis() + "\n");
+
+        // 벽
+        FBResource wall = ResultContent.HOUSE.get("wall");
+
+        if(wall.getName().equals("wall01black")){
+            img_wall.setImageResource(R.drawable.wall01black);
+        }
+
+        else if(wall.getName().equals("wall01blue")){
+            img_wall.setImageResource(R.drawable.wall01blue);
+        }
+
+        else if(wall.getName().equals("wall01gray")){
+            img_wall.setImageResource(R.drawable.wall01gray);
+        }
+
+        else if(wall.getName().equals("wall01green")){
+            img_wall.setImageResource(R.drawable.wall01green);
+        }
+
+        else if(wall.getName().equals("wall01orange")){
+            img_wall.setImageResource(R.drawable.wall01orange);
+        }
+
+        else if(wall.getName().equals("wall01purple")){
+            img_wall.setImageResource(R.drawable.wall01purple);
+        }
+
+        else if(wall.getName().equals("wall01white")){
+            img_wall.setImageResource(R.drawable.wall01white);
+        }
+
+        else if(wall.getName().equals("wall01yellow")){
+            img_wall.setImageResource(R.drawable.wall01yellow);
+        }
+
+        resultStr.append("벽 : " + wall.getAnalysis() + "\n");
+
+        // 문
+        FBResource door = ResultContent.HOUSE.get("door");
+
+        if(door.getName().equals("door01")){
+            img_door.setImageResource(R.drawable.door01);
+        }
+
+        else if(door.getName().equals("door02")){
+            img_door.setImageResource(R.drawable.door02);
+        }
+
+        else if(door.getName().equals("door03")){
+            img_door.setImageResource(R.drawable.door03);
+        }
+
+        else if(door.getName().equals("door04")){
+            img_door.setImageResource(R.drawable.door04);
+        }
+
+        else if(door.getName().equals("door05")){
+            img_door.setImageResource(R.drawable.door05);
+        }
+
+        resultStr.append("문 : " + door.getAnalysis() + "\n");
+
+        // 굴뚝
+        FBResource chimney = ResultContent.HOUSE.get("chimney");
+
+        if(chimney.getName().equals("chimney01")){
+            img_chimney.setImageResource(R.drawable.chimney01);
+        }
+
+        else if(chimney.getName().equals("chimney02")){
+            img_chimney.setImageResource(R.drawable.chimney02);
+        }
+
+        else if(chimney.getName().equals("chimney03")){
+            img_chimney.setImageResource(R.drawable.chimney03);
+        }
+
+        else if(chimney.getName().equals("chimney04")){
+            img_chimney.setImageResource(R.drawable.chimney04);
+        }
+
+        resultStr.append("굴뚝 : " + chimney.getAnalysis() + "\n");
+
+        htp_house_content.setText(resultStr.toString());
 
     }
 
