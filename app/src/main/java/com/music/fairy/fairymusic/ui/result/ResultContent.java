@@ -34,6 +34,8 @@ public class ResultContent {
 
     public static Map<Integer, ColorInfo> COLOR = new HashMap<>(10);
 
+    public static String PERSON = "";
+
     static {
         addItem(new ResultItem("1", 621));
         addItem(new ResultItem("2", 496));

@@ -68,6 +68,7 @@ public class ResultDetailActivity extends BaseActivity {
         pieChart = (PieChart)findViewById(R.id.chart_color);
         setColor(selectionNum);
         setHouse(selectionNum);
+        setPerson(selectionNum);
 
         ResultDetailFragment fragment =  ResultDetailFragment.newInstance(getIntent().getStringExtra(ResultDetailFragment.ARG_ITEM_ID));
         getFragmentManager().beginTransaction().replace(R.id.result_detail_container, fragment).commit();
@@ -317,6 +318,63 @@ public class ResultDetailActivity extends BaseActivity {
                     jo2 = (JSONObject) jo.get("door");
                     resObj = new FBResource(jo2.getString("name"), jo2.getString("analysis"));
                     ResultContent.HOUSE.put("door", resObj);
+
+                }
+            }
+        }
+        catch (Exception e){
+            Log.i("RDF", e.toString());
+        }
+    }
+
+    public void setPerson(int selectionNum){
+        URL url = null;
+        HttpURLConnection con = null;
+        StringBuilder sb = new StringBuilder();
+
+        try{
+            // http://203.233.196.130:8888/webre/
+            url = new URL("http://203.233.196.130:8888/fairybook/app/getPersonResult");
+        }catch (MalformedURLException e){
+            Log.i("RDF err", e.toString());
+        }
+        try{
+            con = (HttpURLConnection)url.openConnection();
+            if(con != null){
+                con.setConnectTimeout(10000); //연결제한시간. 0은 무한대기.
+                con.setUseCaches(false); //캐쉬 사용여부
+                con.setRequestMethod("POST"); //요청방식 선택 (GET, POST)
+                con.setRequestProperty("Content-Type","application/json");
+                con.setDoOutput(true); //OutputStream으로 POST 데이터를 넘겨주겠다는 옵션.
+                con.setDoInput(true); //InputStream으로 서버로 부터 응답을 받겠다는 옵션.
+
+                String request_str = "{'selectionNum' : '" + selectionNum + "'}";
+                JSONObject requestObj = new JSONObject(request_str);
+
+                OutputStream os = con.getOutputStream(); //Request Body에 Data를 담기위해 OutputStream 객체를 생성.
+                os.write(requestObj.toString().getBytes());
+                os.flush();
+                os.close();
+
+                if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader in = new InputStreamReader(con.getInputStream());
+
+                    int ch;
+
+                    // 웹서버에서 반환값 받아오기
+                    while ((ch = in.read()) != -1) {
+                        sb.append((char) ch);
+                    }
+
+                    in.close();
+
+                    Log.i("Person", sb.toString());
+
+                    String person_str = sb.toString();
+                    ResultContent.PERSON = person_str;
+
+                    /*왜인지 이건 널포인트 떠. TextView person = (TextView)findViewById(R.id.htp_person_content);
+                    person.setText(person_str);*/
 
                 }
             }

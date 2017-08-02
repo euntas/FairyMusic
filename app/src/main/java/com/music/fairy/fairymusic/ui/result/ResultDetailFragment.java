@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.Resource;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
@@ -89,6 +90,9 @@ public class ResultDetailFragment extends BaseFragment implements OnChartValueSe
     @Bind(R.id.htp_house_content)
     TextView htp_house_content;
 
+    @Bind(R.id.htp_person_content)
+    TextView htp_person_content;
+
     @Bind(R.id.img_chimney)
     ImageView img_chimney;
 
@@ -143,6 +147,8 @@ public class ResultDetailFragment extends BaseFragment implements OnChartValueSe
             setHTPResult();
 
             setHouseResult();
+
+            htp_person_content.setText(ResultContent.PERSON);
         }
 
         return rootView;
